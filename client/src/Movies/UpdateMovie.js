@@ -2,15 +2,19 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {useParams, useHistory} from "react-router-dom";
 
-const UpdateMovie = () => {
+const initialState = {
+    id: Date.now(),
+    title: "",
+    director: "",
+    metascore: "",
+    stars: []
+    };
+
+
+const UpdateMovie = (props) => {
     const {id} = useParams();
-    const [inputs, setInputs] = useState({
-        id: Date.now(),
-        title: "",
-        director: "",
-        metascore: "",
-        stars: []
-        });
+    const {push} = useHistory();
+    const [inputs, setInputs] = useState(initialState);
 
     const handleChange = (e) => {
         e.persist();
@@ -30,6 +34,10 @@ const UpdateMovie = () => {
         .catch((err) => {
             console.log('err', err)
         })
+
+        setInputs(initialState);
+        push(`/`);
+
     }
     
 
