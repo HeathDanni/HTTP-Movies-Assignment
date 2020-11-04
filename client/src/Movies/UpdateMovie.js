@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
+import axios from 'axios';
+import {useParams, useHistory} from "react-router-dom";
 
 const UpdateMovie = () => {
+    const {id} = useParams();
     const [inputs, setInputs] = useState({
+        id: Date.now(),
         title: "",
         director: "",
         metascore: "",
-    });
+        stars: []
+        });
 
     const handleChange = (e) => {
         e.persist();
@@ -13,15 +18,25 @@ const UpdateMovie = () => {
             ...inputs,
             [e.target.name]: e.target.value
         });
-
-        console.log(inputs)
     };
 
-    console.log(inputs)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios
+        .put(`http://localhost:5000/api/movies/${id}`, inputs)
+        .then((res) => {
+            console.log('res', res)
+        })
+        .catch((err) => {
+            console.log('err', err)
+        })
+    }
+    
 
     return (
      <div className="movie-card flex-container">
          <h2>Update Movie</h2>
+         <form onSubmit={handleSubmit} className="flex-container">
          <label htmlFor='title' className='inputLabel'>
              Title:
              <input
@@ -46,14 +61,15 @@ const UpdateMovie = () => {
              onChange={handleChange}
              ></input>
          </label>
-         <label htmlFor='actors' className='inputLabel'>
+         {/* <label htmlFor='actors' className='inputLabel'>
              Actors:
              <input
-             name='actors'
-             id='actors'
-             ></input>
-         </label>
+             name='stars'
+             id='stars'
+             ></input> */}
+         {/* </label> */}
          <button>Save</button>
+         </form>
      </div>
     );
   };
