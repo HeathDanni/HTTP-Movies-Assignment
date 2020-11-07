@@ -95,3 +95,13 @@ body {
   background-color: lightseagreen;
   text-decoration: none;
 }
+
+.delete-button {
+  position: absolute;
+  top: 125px;
+  right: 25px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: red;
+  text-decoration: none;
+}
