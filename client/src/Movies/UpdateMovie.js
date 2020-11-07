@@ -4,7 +4,6 @@ import {useParams, useHistory} from "react-router-dom";
 import MovieList from './MovieList';
 
 const initialState = {
-    id: Date.now(),
     title: "",
     director: "",
     metascore: "",
