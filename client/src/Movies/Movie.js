@@ -20,15 +20,17 @@ function Movie({ addToSavedList }) {
     addToSavedList(movie);
   };
 
-  const deleteMovie = (id) => {
+  const deleteMovie = (e) => {
+    e.preventDefault();
     axios
-      .delete(`http://localhost:5000/api/movies/${id}`)
+      .delete(`http://localhost:5000/api/movies/${movie.id}`)
       .then((res) => {
         console.log("delete res:", res)
       })
       .catch((err) => {
         console.log('delete err', err)
       })
+      push('/')
   }
 
   useEffect(() => {
@@ -49,7 +51,7 @@ function Movie({ addToSavedList }) {
       <button onClick= {() => push(`/update-movie/${movie.id}`)} className="update-button">
         Edit
       </button>
-      <button onClick={() => {deleteMovie(movie.id)}} className="delete-button">
+      <button onClick={deleteMovie} className="delete-button">
         Delete
       </button>
     </div>
