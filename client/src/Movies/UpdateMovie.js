@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {useParams, useHistory} from "react-router-dom";
+import MovieList from './MovieList';
 
 const initialState = {
     id: Date.now(),
@@ -30,14 +31,12 @@ const UpdateMovie = (props) => {
         .put(`http://localhost:5000/api/movies/${id}`, inputs)
         .then((res) => {
             console.log('res', res)
+        props.setMovieList(...props.MovieList, res.data)
         })
         .catch((err) => {
             console.log('err', err)
         })
-
-        setInputs(initialState);
         push(`/`);
-
     }
     
 
